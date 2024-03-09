@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Board</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .draggable {
+      cursor: pointer;
+    }
+    .dropzone {
+      min-height: 100px;
+      border: 2px dashed #aaa;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div id="app" class="flex justify-center mt-8 space-x-4">
+    <div class="p-4 bg-white rounded-md shadow-md w-80 dropzone" id="tasksToDo" ondrop="drop(event, 'tasksToDo')" ondragover="allowDrop(event)">
+      <h2 class="text-lg font-semibold mb-4 text-red-500">To Do</h2>
+      <div id="tasksToDoContent" class="bg-gray-200 p-3 mb-2 rounded-md" ondrop="drop(event, 'tasksToDo')" ondragover="allowDrop(event)">
+      </div>
+      <button onclick="showAddTaskModal('tasksToDo')" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400">Add Task</button>
+    </div>
+
+    <div class="p-4 bg-white rounded-md shadow-md w-80 dropzone" id="tasksInProgress" ondrop="drop(event, 'tasksInProgress')" ondragover="allowDrop(event)">
+      <h2 class="text-lg font-semibold mb-4 text-yellow-400">In Progress</h2>
+      <div id="tasksInProgressContent" class="bg-gray-200 p-3 mb-2 rounded-md" ondrop="drop(event, 'tasksInProgress')" ondragover="allowDrop(event)">
+      </div>
+      <button onclick="showAddTaskModal('tasksInProgress')" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400">Add Task</button>
+    </div>
+
+    <div class="p-4 bg-white rounded-md shadow-md w-80 dropzone" id="tasksDone" ondrop="drop(event, 'tasksDone')" ondragover="allowDrop(event)">
+      <h2 class="text-lg font-semibold mb-4 text-green-700">Done</h2>
+      <div id="tasksDoneContent" class="bg-gray-200 p-3 mb-2 rounded-md" ondrop="drop(event, 'tasksDone')" ondragover="allowDrop(event)">
+      </div>
+      <button onclick="showAddTaskModal('tasksDone')" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400">Add Task</button>
+    </div>
+  </div>
+
+  <div id="modal" class="modal fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50" style="display: none;">
+    <div class="modal-content bg-white p-8 rounded-md shadow-md w-96">
+      <span class="close absolute top-2 right-2 text-gray-500 cursor-pointer" onclick="hideAddTaskModal()">&times;</span>
+      <h2 class="text-lg font-semibold mb-4">Add New Task</h2>
+      <input id="taskTitle" type="text" class="w-full rounded-md border-gray-300 mb-2 px-4 py-2" placeholder="Title">
+      <textarea id="taskDescription" class="w-full rounded-md border-gray-300 mb-2 px-4 py-2" placeholder="Description" rows="4"></textarea>
+      <button onclick="addTask()" id="addTaskButton" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400">Add</button>
+    </div>
+  </div>
+
+  <script src="action.js"></script>
+</body>
+</html>
